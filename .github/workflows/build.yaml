@@ -1,0 +1,13 @@
+git clone git@github.com:u-boot/u-boot.git --depth 1
+cd u-boot
+
+make qemu_arm64_defconfig # 生成针对 QEMU virt 的 config
+make -j16 CROSS_COMPILE=aarch64-linux-gnu- # 使用 CROSS_COMPILE 指定的工具链构建
+
+qemu-system-aarch64 -machine virt -cpu cortex-a57 -bios u-boot.bin -nographic
+
+
+qemu-system-aarch64 -nographic \
+    -machine virt -cpu cortex-a57 -smp 1 -m 2G \
+    -bios u-boot.bin \
+    -drive if=pflash,format=raw,index=1,file=flash.img
