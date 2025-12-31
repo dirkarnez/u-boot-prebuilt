@@ -31,14 +31,15 @@ set -e
 # export UBOOT_CONFIG="mx6cuboxi_defconfig"
 # make mrproper
 # 
-export PATH="/opt/arm-cortexa9_neon-linux-gnueabihf/bin:$PATH" && \
+
+export PATH="/opt/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu/bin:$PATH" && \
 arm-cortexa9_neon-linux-gnueabihf-gcc --version && \
 git clone git@github.com:u-boot/u-boot.git --depth 1 && \
 cd /workspace/u-boot && \
-export CROSS_COMPILE="arm-cortexa9_neon-linux-gnueabihf-" && \
+export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
 announce "Building u-boot" && \
 make qemu_arm64_defconfig && \
-make -j16 CROSS_COMPILE=aarch64-linux-gnu- && \
+make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
 announce "copying files" && \
 install -v -m644 -D ./SPL /dist/SPL && \
