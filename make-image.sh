@@ -33,6 +33,7 @@ set -e
 # 
 
 # install -v -m644 -D ./SPL /dist/SPL && \
+# install -v -m644 -D ./u-boot.img /dist/u-boot.img && \
 export PATH="/opt/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu/bin:$PATH" && \
 aarch64-none-linux-gnu-gcc --version && \
 git clone --recurse-submodules --depth 1 --branch v2025.10 https://github.com/u-boot/u-boot.git && \
@@ -44,7 +45,7 @@ make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
 ls && \
 announce "copying files" && \
-install -v -m644 -D ./u-boot.img /dist/u-boot.img && \
+install -v -m644 -D ./u-boot.bin /dist/u-boot.bin && \
 install -v -m644 -D ./examples/standalone/hello_world.bin /dist/hello_world.bin && \
 announce "files copied"
 
