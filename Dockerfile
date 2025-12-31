@@ -21,7 +21,9 @@ RUN apt-get -y --no-install-recommends --allow-unauthenticated install \
    flex \
    bison \
    openssl \
-   libssl-dev
+   libssl-dev \
+   gnutls-bin \
+   libgnutls28-dev
 
 # RUN dpkg --add-architecture i386 && \
 #    apt-get update && \
