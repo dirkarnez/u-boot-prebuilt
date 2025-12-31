@@ -33,7 +33,7 @@ set -e
 # 
 
 export PATH="/opt/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu/bin:$PATH" && \
-arm-cortexa9_neon-linux-gnueabihf-gcc --version && \
+aarch64-none-linux-gnu-gcc --version && \
 git clone git@github.com:u-boot/u-boot.git --depth 1 && \
 cd /workspace/u-boot && \
 export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
