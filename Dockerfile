@@ -58,13 +58,20 @@ RUN apt-get -y --no-install-recommends --allow-unauthenticated install \
 #    chmod -R +x . 
 
 # /opt/arm-cortexa9_neon-linux-gnueabihf/...
+# RUN cd /opt; \
+#    wget https://github.com/dirkarnez/crosstool-ng-prebuilt/releases/download/v20251209/arm-cortexa9_neon-linux-gnueabihf.zip && \
+#    unzip arm-cortexa9_neon-linux-gnueabihf.zip -d arm-cortexa9_neon-linux-gnueabihf && \
+#    /opt/arm-cortexa9_neon-linux-gnueabihf/bin/arm-cortexa9_neon-linux-gnueabihf-gcc --version && \
+#    rm arm-cortexa9_neon-linux-gnueabihf.zip && \
+#    chmod -R 777 .
+
 RUN cd /opt; \
-   wget https://github.com/dirkarnez/crosstool-ng-prebuilt/releases/download/v20251209/arm-cortexa9_neon-linux-gnueabihf.zip && \
-   unzip arm-cortexa9_neon-linux-gnueabihf.zip -d arm-cortexa9_neon-linux-gnueabihf && \
-   /opt/arm-cortexa9_neon-linux-gnueabihf/bin/arm-cortexa9_neon-linux-gnueabihf-gcc --version && \
-   rm arm-cortexa9_neon-linux-gnueabihf.zip && \
+   wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu.tar.xz && \
+   tar xvfJ arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu.tar.xz && \
+   /opt/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-gcc --version && \
+   rm arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu.tar.xz && \
    chmod -R 777 .
-   
+
 RUN mkdir /workspace
 RUN mkdir /dist
 
