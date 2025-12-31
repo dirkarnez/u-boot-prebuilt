@@ -19,7 +19,9 @@ RUN apt-get -y --no-install-recommends --allow-unauthenticated install \
    file \
    lzop \
    flex \
-   bison
+   bison \
+   openssl \
+   libssl-dev
 
 # RUN dpkg --add-architecture i386 && \
 #    apt-get update && \
