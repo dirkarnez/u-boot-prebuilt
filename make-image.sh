@@ -34,7 +34,7 @@ set -e
 
 export PATH="/opt/arm-gnu-toolchain-15.2.rel1-x86_64-aarch64-none-linux-gnu/bin:$PATH" && \
 aarch64-none-linux-gnu-gcc --version && \
-git clone git@github.com:u-boot/u-boot.git --depth 1 && \
+git clone --recurse-submodules --depth 1 --branch v2025.10 https://github.com/u-boot/u-boot.git && \
 cd /workspace/u-boot && \
 export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
 announce "Building u-boot" && \
