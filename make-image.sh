@@ -42,9 +42,10 @@ export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
 announce "Building u-boot" && \
 make qemu_arm64_defconfig && \
 echo "CONFIG_EXAMPLES =y" >> .config && \
+cat .config && \
 make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
-ls && \
+ls -R && \
 announce "copying files" && \
 install -v -m644 -D ./u-boot.bin /dist/u-boot.bin && \
 install -v -m644 -D ./examples/standalone/hello_world.bin /dist/hello_world.bin && \
