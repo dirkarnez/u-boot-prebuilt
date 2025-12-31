@@ -44,10 +44,8 @@ make qemu_arm64_defconfig && \
 cat .config && \
 echo "CONFIG_EXAMPLES=y" >> .config && \
 cat .config && \
-make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
-make -j16 examples CROSS_COMPILE=aarch64-none-linux-gnu- && \
+make all -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
-ls -R && \
 announce "copying files" && \
 install -v -m644 -D ./u-boot.bin /dist/u-boot.bin && \
 install -v -m644 -D ./examples/standalone/hello_world.bin /dist/hello_world.bin && \
