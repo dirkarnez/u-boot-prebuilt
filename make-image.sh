@@ -41,9 +41,11 @@ cd /workspace/u-boot && \
 export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
 announce "Building u-boot" && \
 make qemu_arm64_defconfig && \
+cat .config && \
 echo "CONFIG_EXAMPLES=y" >> .config && \
 cat .config && \
 make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
+make -j16 examples CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
 ls -R && \
 announce "copying files" && \
