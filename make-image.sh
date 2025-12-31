@@ -1,0 +1,53 @@
+#!/bin/bash
+
+echo "User: $(whoami) UID: $(id -u) GID: $(id -g)"
+
+gcc --version
+
+# an echo that will stand out in the logs
+function announce () {
+	whole_line_length=80
+    announcement="$*"
+    announcement_length=${#announcement}
+	
+    pad_whole_line=$(printf '%*s' $whole_line_length | tr ' ' '#')
+	pad_announcement_left_length=$((($whole_line_length / 2) - (announcement_length - 2) - 2))
+    pad_announcement_left=$(printf '%*s' $pad_announcement_left_length | tr ' ' '#')
+	
+	pad_announcement_right_length=$(($whole_line_length - $pad_announcement_left_length - 4 - $announcement_length))
+    pad_announcement_right=$(printf '%*s' $pad_announcement_right_length | tr ' ' '#')
+
+    echo $size
+    echo $pad_whole_line
+    echo "$pad_announcement_left  $*  $pad_announcement_right"
+    echo $pad_whole_line
+}
+
+set -e
+
+# git clone --branch v2018.01-solidrun-imx6 https://github.com/SolidRun/u-boot.git u-boot-imx6-github && \
+# cd u-boot-imx6-github && \
+
+# export UBOOT_CONFIG="mx6cuboxi_defconfig"
+# make mrproper
+# 
+export PATH="/opt/arm-cortexa9_neon-linux-gnueabihf/bin:$PATH" && \
+arm-cortexa9_neon-linux-gnueabihf-gcc --version && \
+git clone git@github.com:u-boot/u-boot.git --depth 1 && \
+cd /workspace/u-boot && \
+export CROSS_COMPILE="arm-cortexa9_neon-linux-gnueabihf-" && \
+announce "Building u-boot" && \
+make qemu_arm64_defconfig && \
+make -j16 CROSS_COMPILE=aarch64-linux-gnu- && \
+announce "image build appears to have been successful" && \
+announce "copying files" && \
+install -v -m644 -D ./SPL /dist/SPL && \
+install -v -m644 -D ./u-boot.img /dist/u-boot.img && \
+install -v -m644 -D ./examples/standalone/hello_world.bin /dist/hello_world.bin && \
+announce "files copied"
+
+
+
+# for file in $(find source -type f -name *.py); do
+#     install -m 644 -D ${file} dest/${file#source/}
+# done
