@@ -43,6 +43,10 @@ announce "Building u-boot" && \
 make qemu_arm64_defconfig && \
 cat .config && \
 echo "CONFIG_EXAMPLES=y" >> .config && \
+echo "CONFIG_API=y" >> .config && \
+echo "CONFIG_ARM=y" >> .config && \
+echo "CONFIG_ARCH_QEMU=y" >> .config && \
+echo "CONFIG_SANDBOX=n" >> .config && \
 cat .config && \
 make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
