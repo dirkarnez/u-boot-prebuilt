@@ -47,6 +47,7 @@ echo "CONFIG_EXAMPLES=y" >> .config && \
 echo "CONFIG_ARM=y" >> .config && \
 echo "CONFIG_ARCH_QEMU=y" >> .config && \
 echo "CONFIG_SANDBOX=n" >> .config && \
+echo "CONFIG_USE_PRIVATE_LIBGCC=y" >> .config && \
 cat .config && \
 make V=1 -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
