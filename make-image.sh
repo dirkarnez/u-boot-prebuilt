@@ -30,7 +30,8 @@ set -e
 
 # export UBOOT_CONFIG="mx6cuboxi_defconfig"
 # make mrproper
-# 
+
+# echo "CONFIG_API=y" >> .config && \
 
 # install -v -m644 -D ./SPL /dist/SPL && \
 # install -v -m644 -D ./u-boot.img /dist/u-boot.img && \
@@ -40,15 +41,14 @@ git clone --recurse-submodules --depth 1 --branch v2025.10 https://github.com/u-
 cd /workspace/u-boot && \
 export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
 announce "Building u-boot" && \
-make qemu_arm64_defconfig && \
+make V=1 qemu_arm64_defconfig && \
 cat .config && \
 echo "CONFIG_EXAMPLES=y" >> .config && \
-echo "CONFIG_API=y" >> .config && \
 echo "CONFIG_ARM=y" >> .config && \
 echo "CONFIG_ARCH_QEMU=y" >> .config && \
 echo "CONFIG_SANDBOX=n" >> .config && \
 cat .config && \
-make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
+make V=1 -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
 announce "image build appears to have been successful" && \
 announce "copying files" && \
 install -v -m644 -D ./u-boot.bin /dist/u-boot.bin && \
