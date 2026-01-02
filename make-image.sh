@@ -42,7 +42,6 @@ cd /workspace/u-boot && \
 export CROSS_COMPILE="aarch64-none-linux-gnu-" && \
 announce "Building u-boot" && \
 make V=1 qemu_arm64_defconfig && \
-cat .config && \
 echo "CONFIG_EXAMPLES=y" >> .config && \
 echo "CONFIG_ARM=y" >> .config && \
 echo "CONFIG_ARCH_QEMU=y" >> .config && \
