@@ -45,9 +45,6 @@ cat .config && \
 echo "CONFIG_EXAMPLES=y" >> .config && \
 cat .config && \
 make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
-cd examples && \
-make -j16 CROSS_COMPILE=aarch64-none-linux-gnu- && \
-cd .. && \
 announce "image build appears to have been successful" && \
 announce "copying files" && \
 install -v -m644 -D ./u-boot.bin /dist/u-boot.bin && \
